@@ -1,0 +1,15 @@
+<svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+  <!-- Simplified sticky note for favicon -->
+  <rect x="4" y="6" width="20" height="20" rx="1" ry="1" fill="#ffeb3b" stroke="#ffc107" stroke-width="0.5"/>
+  
+  <!-- Folded corner -->
+  <path d="M24 6 L24 12 L18 12 Z" fill="#ffc107"/>
+  
+  <!-- Simple lines -->
+  <line x1="7" y1="12" x2="21" y2="12" stroke="#666" stroke-width="0.3" opacity="0.6"/>
+  <line x1="7" y1="16" x2="19" y2="16" stroke="#666" stroke-width="0.3" opacity="0.6"/>
+  <line x1="7" y1="20" x2="20" y2="20" stroke="#666" stroke-width="0.3" opacity="0.6"/>
+  
+  <!-- Pin -->
+  <circle cx="10" cy="9" r="1" fill="#e53935"/>
+</svg>
