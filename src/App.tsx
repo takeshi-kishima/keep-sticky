@@ -3,10 +3,15 @@ import { AuthProvider, LoginButton, useAuth } from './components/auth';
 import { NotesList } from './components/notes/NotesList';
 import { NoteEditor } from './components/notes/NoteEditor';
 import { StickyNoteComponent } from './components/sticky/StickyNoteComponent';
+import { PopoutSticky } from './components/sticky/PopoutSticky';
 import { useNotes } from './hooks/useNotes';
 import { useStickies } from './hooks/useStickies';
 import type { Note, CreateNoteRequest, UpdateNoteRequest } from './types';
 import './App.css';
+
+function PopoutView({ noteId }: { noteId: string }) {
+  return <PopoutSticky noteId={noteId} />;
+}
 
 function AppContent() {
   const { user, isAuthenticated, logout } = useAuth();
@@ -51,6 +56,14 @@ function AppContent() {
   const handleCreateSticky = async (noteId: string) => {
     const offset = stickies.length * 30;
     await addSticky(noteId, { x: 320 + offset, y: 80 + offset });
+  };
+
+  const openPopout = (noteId: string) => {
+    window.open(
+      `/?popout=${noteId}`,
+      `sticky-${noteId}`,
+      'width=300,height=400,menubar=no,toolbar=no,location=no,status=no',
+    );
   };
 
   return (
@@ -105,6 +118,7 @@ function AppContent() {
                 onMinimize={() => toggleMinimized(sticky.id, sticky.isMinimized)}
                 onBringToFront={() => bringStickyToFront(sticky.id)}
                 onNoteEdit={(title, content) => editNote(sticky.noteId, { title, content })}
+                onPopout={() => openPopout(sticky.noteId)}
               />
             );
           })}
@@ -129,9 +143,12 @@ function AppContent() {
 }
 
 function App() {
+  const params = new URLSearchParams(window.location.search);
+  const popoutNoteId = params.get('popout');
+
   return (
     <AuthProvider>
-      <AppContent />
+      {popoutNoteId ? <PopoutView noteId={popoutNoteId} /> : <AppContent />}
     </AuthProvider>
   );
 }

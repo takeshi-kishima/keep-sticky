@@ -278,6 +278,7 @@
   flex-shrink: 0;
 }
 
+.sticky-popout,
 .sticky-minimize,
 .sticky-close {
   width: 22px;
@@ -293,6 +294,7 @@
   line-height: 1;
 }
 
+.sticky-popout:hover,
 .sticky-minimize:hover,
 .sticky-close:hover {
   background: rgba(0, 0, 0, 0.1);
@@ -729,4 +731,67 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+/* === Popout Sticky === */
+.popout-sticky {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.popout-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  color: var(--text-secondary);
+  font-size: 14px;
+}
+
+.popout-title {
+  padding: 10px 12px;
+  font-size: 15px;
+  font-weight: 600;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  color: var(--text);
+  cursor: default;
+  flex-shrink: 0;
+}
+
+.popout-content {
+  flex: 1;
+  padding: 10px 12px;
+  overflow-y: auto;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text);
+  cursor: default;
+}
+
+.popout-text {
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.popout-labels {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  padding: 8px 12px;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  flex-shrink: 0;
+}
+
+.popout-inline-edit {
+  width: 100%;
+  border: none;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 4px;
+  padding: 2px 4px;
+  font-size: inherit;
+  font-family: inherit;
+  outline: none;
+  resize: vertical;
 }

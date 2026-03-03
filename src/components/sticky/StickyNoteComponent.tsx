@@ -10,6 +10,7 @@ interface StickyNoteProps {
   onMinimize: () => void;
   onBringToFront: () => void;
   onNoteEdit?: (title: string, content: string) => void;
+  onPopout?: () => void;
 }
 
 export const StickyNoteComponent: React.FC<StickyNoteProps> = ({
@@ -21,6 +22,7 @@ export const StickyNoteComponent: React.FC<StickyNoteProps> = ({
   onMinimize,
   onBringToFront,
   onNoteEdit,
+  onPopout,
 }) => {
   const [isDragging, setIsDragging] = useState(false);
   const [isResizing, setIsResizing] = useState(false);
@@ -186,6 +188,11 @@ export const StickyNoteComponent: React.FC<StickyNoteProps> = ({
           )}
         </div>
         <div className="sticky-controls">
+          {onPopout && (
+            <button onClick={onPopout} className="sticky-popout" type="button" title="Pop out">
+              &#8599;
+            </button>
+          )}
           <button onClick={onMinimize} className="sticky-minimize" type="button" title="Minimize">
             &minus;
           </button>
