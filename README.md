@@ -1,73 +1,67 @@
-# React + TypeScript + Vite
+# Keep Sticky
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Firebase Firestore をバックエンドとした PWA 付箋アプリ。
+リアルタイム同期とオフライン対応により、複数端末で付箋を共有できます。
 
-Currently, two official plugins are available:
+## セットアップ
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### 1. 依存関係のインストール
 
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### 2. Firebase プロジェクトの準備
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+[Firebase Console](https://console.firebase.google.com/) で以下を設定してください。
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+1. **プロジェクト作成**: 「プロジェクトを追加」から新規作成
+2. **Authentication 有効化**: Authentication → Sign-in method → **Google** を有効にする
+3. **Firestore 作成**: Firestore Database → 「データベースを作成」→ テストモードで開始
+4. **ウェブアプリ登録**: プロジェクトの設定 → マイアプリ → `</>` (ウェブ) → アプリ名を入力して登録
+
+### 3. 環境変数の設定
+
+`.env.example` をコピーして `.env` を作成し、Firebase Console で取得した値を記入します。
+
+```bash
+cp .env.example .env
 ```
+
+`.env` を編集:
+
+```
+VITE_FIREBASE_API_KEY=AIzaSy...
+VITE_FIREBASE_AUTH_DOMAIN=your-project.firebaseapp.com
+VITE_FIREBASE_PROJECT_ID=your-project
+VITE_FIREBASE_STORAGE_BUCKET=your-project.firebasestorage.app
+VITE_FIREBASE_MESSAGING_SENDER_ID=123456789
+VITE_FIREBASE_APP_ID=1:123456789:web:abc123
+```
+
+> Firebase Console → プロジェクトの設定 → マイアプリ → 「SDK の設定と構成」に `firebaseConfig` オブジェクトとして表示されている値をそれぞれ対応する変数に記入してください。
+
+### 4. 起動
+
+```bash
+npm run dev
+```
+
+`http://localhost:5173` でアプリが起動します。
+
+## コマンド一覧
+
+| コマンド | 説明 |
+|---------|------|
+| `npm run dev` | 開発サーバー起動 |
+| `npm run build` | TypeScript チェック + 本番ビルド |
+| `npm run preview` | 本番ビルドのプレビュー（PWA動作確認用） |
+| `npm run test:run` | テスト実行 |
+| `npm run lint` | ESLint |
+
+## 技術スタック
+
+- React 19 + TypeScript + Vite 7
+- Firebase (Authentication, Firestore)
+- vite-plugin-pwa + Workbox
+- Vitest
