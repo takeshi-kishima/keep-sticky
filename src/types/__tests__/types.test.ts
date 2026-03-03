@@ -1,14 +1,14 @@
 import { describe, it, expect } from 'vitest';
-import type { 
-  User, 
-  AuthContextType, 
-  Note, 
-  CreateNoteRequest, 
+import type {
+  User,
+  AuthContextType,
+  Note,
+  CreateNoteRequest,
   UpdateNoteRequest,
   StickyNote,
   Position,
   Size,
-  UpdateStickyRequest 
+  UpdateStickyRequest
 } from '../index';
 
 describe('Type Definitions', () => {

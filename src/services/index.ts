@@ -1,4 +1,17 @@
-// Re-export all services for easy importing
-export { StickyService } from './StickyService';
-export { GoogleKeepApiService } from './GoogleKeepApiService';
-export type { GoogleKeepApiConfig } from './GoogleKeepApiService';
+export {
+  subscribeToNotes,
+  createNote,
+  updateNote,
+  deleteNote,
+} from './NoteService';
+
+export {
+  subscribeToStickies,
+  createSticky,
+  updateStickyPosition,
+  updateStickySize,
+  closeSticky,
+  toggleStickyMinimized,
+  bringToFront,
+  deleteStickiesForNote,
+} from './StickyService';

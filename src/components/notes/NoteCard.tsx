@@ -7,28 +7,14 @@ interface NoteCardProps {
   onMakeSticky: () => void;
 }
 
-/**
- * Note Card Component
- * Displays individual note in the notes list
- */
 export const NoteCard: React.FC<NoteCardProps> = ({ note, onSelect, onMakeSticky }) => {
-  const formatDate = (date: Date) => {
-    return new Intl.DateTimeFormat('ja-JP', {
-      year: 'numeric',
-      month: 'short',
-      day: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit'
-    }).format(date);
-  };
-
   const truncateText = (text: string, maxLength: number = 100) => {
     if (text.length <= maxLength) return text;
     return text.substring(0, maxLength) + '...';
   };
 
   return (
-    <div 
+    <div
       className="note-card"
       style={{ backgroundColor: note.color }}
       onClick={onSelect}
@@ -40,7 +26,7 @@ export const NoteCard: React.FC<NoteCardProps> = ({ note, onSelect, onMakeSticky
         <div className="note-actions">
           {note.isPinned && (
             <span className="pin-indicator" title="Pinned">
-              📌
+              pinned
             </span>
           )}
           <button
@@ -52,7 +38,7 @@ export const NoteCard: React.FC<NoteCardProps> = ({ note, onSelect, onMakeSticky
             title="Open as sticky note"
             type="button"
           >
-            📌
+            Stick
           </button>
         </div>
       </div>
@@ -70,12 +56,6 @@ export const NoteCard: React.FC<NoteCardProps> = ({ note, onSelect, onMakeSticky
           ))}
         </div>
       )}
-
-      <div className="note-metadata">
-        <span className="note-date">
-          {formatDate(note.updatedAt)}
-        </span>
-      </div>
     </div>
   );
 };
